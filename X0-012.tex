@@ -1,0 +1,86 @@
+% super simple template for automated 2021 ADASS manuscript generation from the registration entry
+% place this file in your ADASS2021_author_template directory together with your makedefs file
+%
+% Only few comments here, see the ADASS_template.tex for a more fully commented version, and
+% ManuscriptInstructions.pdf if you need more background, and if you even need more, APS's own
+% manual2010.pdf has it all!
+
+% Version 5-oct-2021 (Peter Teuben & Benjamin Hugo)
+
+\documentclass[11pt,twoside]{article}
+\usepackage{asp2014}
+
+\aspSuppressVolSlug
+\resetcounters
+
+\bibliographystyle{asp2014}
+
+\markboth{Rodriguez et al.}{The SIMPLE Archive}
+% remove/add as you need
+
+\begin{document}
+
+\title{The SIMPLE Archive}
+
+% full name: David Rodriguez
+\author{David~Rodriguez$^1$, Kelle~Cruz$^2$, Will~Cooper$^3$, Niall~Whiteford$^4$, Clemence~Fontanive$^5$, 
+Ella~Hort$^6$, Sherelyn~Alehandro$^2$, Robert~Blackwell$^7$, Daniel~Terach$^8$}
+\affil{$^1$Space Telescope Science Institute, Baltimore, MD, USA; \email{drodriguez@stsci.edu}}
+\affil{$^2$CUNY Hunter College, New York, NY, USA}
+\affil{$^3$University of Hertfordshire, Hertfordshire, United Kingdom}
+\affil{$^4$University of Edinburgh, Edinburgh, Scotland, United Kingdom}
+\affil{$^5$CSH, University of Bern, Bern, Switzerland}
+\affil{$^6$Pomona College, Claremont, CA, USA}
+\affil{$^7$Flatiron Institute, New York, NY, USA}
+\affil{$^8$Pace University, New York, NY, USA}
+% remove/add as you need
+
+% remove/add authors as you need
+\paperauthor{David~Rodriguez}{drodriguez@stsci.edu}{0000-0003-1286-5231}{Space Telescope Science Institute}{}{Baltimore}{MD}{}{USA}
+\paperauthor{Kelle~Cruz}{}{}{CUNY Hunter College}{}{New York}{NY}{}{USA}
+\paperauthor{Will~Cooper}{}{}{University of Hertfordshire}{}{Hertfordshire}{}{}{United Kingdom}
+\paperauthor{Niall~Whiteford}{}{}{University of Edinburgh}{}{Edinburgh}{Scotland}{}{United Kingdom}
+\paperauthor{Clemence~Fontanive}{}{}{CSH, University of Bern}{}{Bern}{}{}{Switzerland}
+\paperauthor{Ella~Hort}{}{}{Pomona College}{}{Claremont}{CA}{}{USA}
+\paperauthor{Sherelyn~Alehandro}{}{}{CUNY Hunter Colleg}{}{New York}{NY}{}{USA}
+\paperauthor{Robert~Blackwell}{}{}{Flatiron Institute}{}{New York}{NY}{}{USA}
+\paperauthor{Daniel~Terach}{}{}{Pace University}{}{New York}{NY}{}{USA}
+% \paperauthor{Name}{Email}{ORCID}{college}{Author2 Department}{City}{State}{Postal Code}{Country}
+
+% remove/add as you need
+
+% leave these next few aindex lines commented for the editors to enable them. Use Aindex.py to generate them for yourself.
+% first presenting author should be the first entry for bold-facing the author index page-reference
+%\aindex{Rodriguez,~D.}
+%\aindex{Author2,~S.}
+% remove/add as you need
+
+% leave the ssindex lines commented for the editors to enable them, use Index.py to suggest yours
+%\ssindex{FOOBAR!conference!ADASS 2020}
+%\ssindex{FOOBAR!organisations!ASP}
+
+% leave the ooindex lines commented for the editors to enable them, use ascl.py to suggest yours
+%\ooindex{FOOBAR, ascl:1101.010}
+  
+\begin{abstract}
+
+We present the SIMPLE Archive alongside its database management tool, AstrodbKit2. SIMPLE is an archive of low mass stars, brown dwarfs, and exoplanets driven by community curation and review using GitHub. SIMPLE relies on AstrodbKit2 to convert back and forth from a document-store model of the database, to a more standard relational database that can be used with established packages like SQLAlchemy. In this poster, we present the architecture of the SIMPLE database and how using AstrodbKit2 facilitates a git workflow for reviewing and approving database modifications.
+
+SIMPLE is available at https://github.com/SIMPLE-AstroDB/SIMPLE-db 
+
+AstrodbKit2 is available at https://github.com/dr-rodriguez/AstrodbKit2
+  
+\end{abstract}
+
+% For example in \citet{PID_adassxxx} it was shown that ...
+
+
+% \bibliography{X0-012}
+
+
+% if we have space left, we might add a conference photograph here. Leave commented for now.
+% \bookpartphoto[width=1.0\textwidth]{foobar.eps}{FooBar Photo (Photo: Any Photographer)}
+
+
+\end{document}
+
