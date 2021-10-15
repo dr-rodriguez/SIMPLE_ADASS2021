@@ -1,0 +1,6 @@
+# this is where you should define *your* macros, not in the Makefile
+P = X0-012
+V = 1
+A = Rodriguez
+E = drodriguez@stsci.edu
+#FIGS = X0-012_*.eps
