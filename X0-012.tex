@@ -24,7 +24,7 @@
 
 % full name: David Rodriguez
 \author{David~Rodriguez$^1$, Kelle~Cruz$^2$, Will~Cooper$^3$, Niall~Whiteford$^4$, Clemence~Fontanive$^5$, 
-Ella~Hort$^6$, Sherelyn~Alehandro$^2$, Robert~Blackwell$^7$, Daniel~Terach$^8$}
+Ella~Hort$^6$, Sherelyn~Alejandro$^2$, Robert~Blackwell$^7$, Daniel~Terach$^8$}
 \affil{$^1$Space Telescope Science Institute, Baltimore, MD, USA; \email{drodriguez@stsci.edu}}
 \affil{$^2$CUNY Hunter College, New York, NY, USA}
 \affil{$^3$University of Hertfordshire, Hertfordshire, United Kingdom}
@@ -82,7 +82,14 @@ SIMPLE strives to represent each individual source as a consistent object that c
 
 AstrodbKit2 is a Python package that uses SQLAlchemy to create and connect to a variety of relational databases (eg, SQLite, Postgres, MSSQL, etc). Tables in AstrodbKit2 are organized into two types: \textit{Object} tables, which have one-to-many relationships to a single primary object table (ie, Sources in the SIMPLE database); and \textit{Reference} tables, which have many-to-many relationships against the object tables and are used to store lookup information like publications, telescopes, or instruments. The SIMPLE Archive gathers measurements for low mass objects into a variety of tables all associated to the primary Sources table by their source name. Object tables in SIMPLE include Photometry, Proper Motions, Radial Velocities, and Spectra; Reference tables include Publications, Telescopes, and Instruments.
 
-Using AstrodbKit2, we can convert the SIMPLE database from a document store mode, where individual Sources are stored as separate JSON files (which can in turn be loaded into NoSQL databases like MongoDB), to a relational database such as SQLite or Postgres that can be accessed with standard tools. JSON files serve as the definitive copy of the database for purposes of version control.
+Using AstrodbKit2, we can convert the SIMPLE database from a document store mode, where individual Sources are stored as separate JSON files (which can in turn be loaded into NoSQL databases like MongoDB), to a relational database such as SQLite or Postgres that can be accessed with standard tools (see Figure~\ref{fig:astrodbkit2}). JSON files, such as the example in Figure~\ref{fig:json} serve as the definitive copy of the database for purposes of version control.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{X0-012_f1.eps}
+    \caption{AstrodbKit2 can convert a database from a document store representation (eg, a list of JSON files) to a relational database (eg, SQLite, Postgres, etc).}
+    \label{fig:astrodbkit2}
+\end{figure}
 
 \section{Collaborative Workflow}
 
@@ -90,6 +97,14 @@ By exporting a database to a JSON document store, we can use git and GitHub to h
 An individual user may contain their own copy of SIMPLE, or any other database supported by AstrodbKit2. They may make changes in their local branch and push to their copy on GitHub. By issuing a pull request they request their changes be adopted into the main branch of the database. Because the database is stored as individual JSON documents, reviewers can see exactly which objects have been updated and can comment on the changes if needed. By using a simple to read format, we benefit from a clear picture of the changes in a pull request. 
 
 As part of the pull request process, automatic tests are run to verify the integrity of the database. This ensures no changes took place that break the functionality of the database. Finally, when the pull request is accepted, additional automated tasks can be performed to regenerate the database and push it to external users of the database, such as a graphical user interface.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[height=0.9\textheight]{X0-012_f2.eps}
+    \caption{Trimmed JSON document for a source in the SIMPLE database}
+    \label{fig:json}
+\end{figure}
 
 % For example in \citet{PID_adassxxx} it was shown that ...
 
