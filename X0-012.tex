@@ -23,19 +23,18 @@
 \title{The SIMPLE Archive: Building a Collaborative Database Workflow}
 
 % full name: David Rodriguez
-\author{David~R.~Rodriguez$^1$, Kelle~Cruz${^2,2.5, 7}$, W.~J.~Cooper$^{3,3.5}$, Niall~Whiteford$^4$, Clemence~Fontanive$^5$, 
-Ella~Hort$^6$, Sherelyn~Alejandro$^2$, Robert~Blackwell$^7$, Daniel~Terach$^8$}
+\author{David~R.~Rodriguez$^1$, Kelle~Cruz${^{2,3,4}}$, W.~J.~Cooper$^{5,6}$, Niall~Whiteford$^7$, Clemence~Fontanive$^8$, 
+Ella~Hort$^9$, Sherelyn~Alejandro$^2$, Robert~Blackwell$^4$, Daniel~Terach$^{10}$}
 \affil{$^1$Space Telescope Science Institute, Baltimore, MD, USA; \email{drodriguez@stsci.edu}}
 \affil{$^2$Hunter College, City University of New York, New York, NY, USA}
-\affil{$^2.5$American Museum of Natural History, New York, NY, USA}
-\affil{$^7$Flatiron Institute, New York, NY, USA}
-\affil{$^3$Centre for Astrophysics Research, University of Hertfordshire, Hatfield AL10 9AB, UK}
-\affil{$3.5$Istituto Nazionale di Astrofisica, Osservatorio Astrofisico di Torino, Strada Osservatorio 20, I-10025 Pino Torinese 24118, IT}
-\affil{$^4$University of Edinburgh, Edinburgh, Scotland, United Kingdom}
-\affil{$^5$CSH, University of Bern, Bern, Switzerland}
-\affil{$^6$Pomona College, Claremont, CA, USA}
-\affil{$^7$Flatiron Institute, New York, NY, USA}
-\affil{$^8$Pace University, New York, NY, USA}
+\affil{$^3$American Museum of Natural History, New York, NY, USA}
+\affil{$^4$Flatiron Institute, New York, NY, USA}
+\affil{$^5$Centre for Astrophysics Research, University of Hertfordshire, Hatfield AL10 9AB, UK}
+\affil{$^6$Istituto Nazionale di Astrofisica, Osservatorio Astrofisico di Torino, Strada Osservatorio 20, I-10025 Pino Torinese 24118, IT}
+\affil{$^7$University of Edinburgh, Edinburgh, Scotland, United Kingdom}
+\affil{$^8$CSH, University of Bern, Bern, Switzerland}
+\affil{$^9$Pomona College, Claremont, CA, USA}
+\affil{$^{10}$Pace University, New York, NY, USA}
 % remove/add as you need
 
 % remove/add authors as you need
@@ -69,16 +68,15 @@ Ella~Hort$^6$, Sherelyn~Alejandro$^2$, Robert~Blackwell$^7$, Daniel~Terach$^8$}
 
 We present the SIMPLE Archive alongside a Python-based database management package, \texttt{AstrodbKit2}. SIMPLE is an archive of low mass stars, brown dwarfs, and exoplanets driven by community curation and review using GitHub. SIMPLE relies on \texttt{AstrodbKit2} to convert back and forth from a document-store model of the database, to a more standard relational database that can be used with established packages like SQLAlchemy. In this poster, we present the architecture of the SIMPLE database and how using \texttt{AstrodbKit2} facilitates a git workflow for reviewing and approving database modifications.
 
-SIMPLE is available at \url{https://github.com/SIMPLE-AstroDB/SIMPLE-db} 
-
-\texttt{AstrodbKit2} is available at \url{https://github.com/dr-rodriguez/AstrodbKit2}
+SIMPLE is available at https://github.com/SIMPLE-AstroDB/SIMPLE-db
+\texttt{AstrodbKit2} is available at https://github.com/dr-rodriguez/AstrodbKit2
   
 \end{abstract}
 
 \section{Motivation and Goals}
 
 The goal of SIMPLE is to develop a community-driven archive where individuals can contribute to the knowledge base of these objects. 
-SIMPLE contains a variety of data and supporting metadata for low mass stars, brown dwarfs, and exoplanets, but serves as an example that can be adapted to other fields of study, such as extragalactic or supernova archives (e.g. The Open Supernova Catalogue). 
+SIMPLE contains a variety of data and supporting metadata for low mass stars, brown dwarfs, and exoplanets, but serves as an example that can be adapted to other fields of study, such as extragalactic or supernova archives (e.g., The Open Supernova Catalogue). 
 SIMPLE strives to represent each individual astronomical source as a consistent object that can be understood and referenced by others during the community review process using the standard git workflow. 
 Because data in relational databases is organized in a manner that is not always supported by version control, we wrote a python package (\texttt{AstrodbKit2}) to facilitate our desired collaborative workflow.
 
@@ -88,11 +86,9 @@ Because data in relational databases is organized in a manner that is not always
  \texttt{AstrodbKit2} is a Python package that uses \texttt{SQLAlchemy} to create and connect to a variety of relational databases (e.g. SQLite, Postgres, MSSQL, etc). 
  \texttt{AstrodbKit2} adds a few additional enhancements beyond SQLAlchemy access, including cone searches and Astropy Table output.
  Tables in \texttt{AstrodbKit2} are organized into two types: \textit{Object} tables, which have one-to-many relationships to a single primary object table (i.e. Sources in the SIMPLE database); and \textit{Reference} tables, which have many-to-many relationships against the object tables and are used to store lookup information like publications, telescopes, or instruments. The SIMPLE Archive gathers measurements for low mass objects into a variety of tables all associated to the primary Sources table by their source name. Object tables in SIMPLE include Photometry, Proper Motions, Radial Velocities, and Spectra; Reference tables include Publications, Telescopes, and Instruments.
- We've designed this schema to be used by other fields of astronomical study.
+ We've designed this schema to be adaptable to other fields of astronomical study.
 
 Using \texttt{AstrodbKit2}, we can convert the SIMPLE database from a document store mode, where individual Sources are stored as separate JSON files (which can in turn be loaded into NoSQL databases like MongoDB), to a relational database such as SQLite or Postgres that can be accessed with standard tools (see Figure~\ref{fig:astrodbkit2}). JSON files, such as the example in Figure~\ref{fig:json}, serve as the definitive copy of the database for purposes of version control.
-
-In the future, we will provide template database which could be used by other collaborations wishing to use  \texttt{AstrodbKit2} for their own datasets.
 
 \begin{figure}
     \centering
@@ -104,18 +100,18 @@ In the future, we will provide template database which could be used by other co
 \section{Collaborative Workflow}
 
 By exporting a database to a JSON document store, we can use git and GitHub to handle version control for our database as well as curate commits via pull requests. 
-An individual user may contain their own copy of SIMPLE, or any other database supported by AstrodbKit2. They may make changes in their local branch and push to their copy on GitHub. By issuing a pull request they request their changes be adopted into the main branch of the database. Because the database is stored as individual JSON documents, reviewers can see exactly which objects have been updated and can comment on the changes if needed. By using a plain-text format, we can take advantage of the git and GitHub features which provide a clear picture of the changes proposed in a pull request. 
+An individual user may contain their own copy of SIMPLE, or any other database supported by \texttt{AstrodbKit2}. They may make changes in their local branch and push to their copy on GitHub. By issuing a pull request they request their changes be adopted into the main branch of the database. Because the database is stored as individual JSON documents, reviewers can see exactly which objects have been updated and can comment on the changes if needed. 
+By using a plain-text format, we can take advantage of the git differences to provide a clear picture of the changes proposed in a pull request. 
 
-As part of the pull request process, automatic tests are run to verify the integrity of the database. This ensures no changes took place that break the functionality of the database. Finally, when the pull request is accepted, additional automated tasks can be performed to regenerate the database and push it to external users of the database, such as a graphical user interface.
-
-Also data integrity tests.
+As part of the pull request process, automatic tests implemented via GitHub-Actions are run to verify the integrity of the database. This ensures no changes took place that break the functionality of the database and also include some level of verification for the data that has been loaded. 
+Finally, when the pull request is accepted, additional automated tasks can be performed to regenerate the database and push it to external users of the database, such as a graphical user interface.
 
 \section{Future Work}
-\subsection{SIMPLE}
-writing ingest scripts to facilitate user contributions.
 
-\subsection{Making available for wider use}
-Eventually going to make a template repo with a template schema. Also template repo with website that works with template repo.
+We are continuing to develop \texttt{AstrodbKit2} and SIMPLE to create a truly collaborative archive. 
+For SIMPLE, we are writing ingests scripts to facility user contributions. These wrap around the underlying \texttt{AstrodbKit2} calls to simplify the process.
+We plan to provide a template GitHub repo that can get users started with a fresh database configured via \texttt{AstrodbKit2} and ready for use. 
+We have been building out a \texttt{Flask}-powered interface for our SIMPLE database and also plan to convert this to a template to serve other \texttt{AstrodbKit2}-enabled databases.
 
 \begin{figure}
     \centering
